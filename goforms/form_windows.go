@@ -1,6 +1,7 @@
 package goforms
 
 import (
+	"fmt"
 	"image"
 	"image/png"
 	"os"
@@ -58,9 +59,11 @@ const (
 	WM_RBUTTONUP   = 0x0205
 	WM_MBUTTONDOWN = 0x0207
 	WM_MBUTTONUP   = 0x0208
-	WM_MOUSEWHEEL  = 0x020A
+	WM_MOUSEWHEEL  = 0x020A // Dec: 522
 	WM_XBUTTONDOWN = 0x020B
 	WM_XBUTTONUP   = 0x020C
+
+	// dec 132 to hex is 0x84
 
 	WM_LBUTTONDBLCLK = 0x0203
 	WM_RBUTTONDBLCLK = 0x0206
@@ -189,6 +192,7 @@ func getImageBytes() (bs []byte, width int32, height int32) {
 }
 
 func wndProc(hwnd syscall.Handle, msg uint32, wParam, lParam uintptr) uintptr {
+	//fmt.Println("Message:", win.MessageName(msg))
 	switch msg {
 	case WM_PAINT:
 		var ps PAINTSTRUCT
@@ -375,8 +379,10 @@ func Run() {
 	for {
 		ret, _, _ := procGetMessageW.Call(uintptr(unsafe.Pointer(&msg)), 0, 0, 0)
 		if ret == 0 {
+			fmt.Println("Exiting...")
 			break
 		}
+		//fmt.Println("procTranslateMessage Message:", msg.message)
 		procTranslateMessage.Call(uintptr(unsafe.Pointer(&msg)))
 		procDispatchMessageW.Call(uintptr(unsafe.Pointer(&msg)))
 	}

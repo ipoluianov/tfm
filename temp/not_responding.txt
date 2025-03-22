@@ -1,0 +1,16 @@
+Message: WM_NCHITTEST
+Message: WM_SETCURSOR
+Mouse move: 770 433
+procTranslateMessage Message: 512
+Message: WM_MOUSEMOVE
+Mouse left window
+procTranslateMessage Message: 675
+Message: WM_MOUSELEAVE
+Message: WM_NCACTIVATE
+Message: WM_ACTIVATE
+Message: WM_ACTIVATEAPP
+Message: WM_KILLFOCUS
+Message: WM_IME_SETCONTEXT
+Message: WM_IME_NOTIFY
+procTranslateMessage Message: 96
+
